@@ -1,11 +1,4 @@
-﻿/* Things to add
-    1. Main Menu, that includes these options
-        1.1. Play
-        1.2. Help
-        1.3. Exit
-    2. Retry option after Game Over
-*/
-#include <QPainter>
+﻿#include <QPainter>
 #include <QTime>
 #include <QRandomGenerator>
 #include "snake.h"
@@ -41,17 +34,10 @@ void Snake::initGame()
 		y[z] = 50;
 	}
 
-    //showMainMenu();
-
 	locateApple();
 
 	timerID = startTimer(DELAY);
 }
-
-//void showMainMeu()
-//{
-//
-//}
 
 void Snake::paintEvent(QPaintEvent *e)
 {
@@ -82,17 +68,25 @@ void Snake::doDrawing()
 
 void Snake::gameOver(QPainter &qp)
 {
-	QString message = "Game Over Biatch...";
-	QFont font("Courier", 15, QFont::DemiBold);
+	QString message = "Game Over!";
+	QString retryMessage = "Retry? (y/n)";
+	QFont font("DejaVu Sans", 15, QFont::Bold);
 	QFontMetrics fm(font);
-	int textWidth = fm.horizontalAdvance(message);
+
+	int gameOverMessageWidth = fm.horizontalAdvance(message);
+	int retryMessageWidth = fm.horizontalAdvance(retryMessage);
 
 	qp.setFont(font);
 	int h = height();
 	int w = width();
 
 	qp.translate(QPoint(w/2, h/2));
-	qp.drawText(-textWidth/2, 0, message);
+	qp.drawText(-gameOverMessageWidth/2, 0, message);
+
+	h = height();
+	w = width();
+	qp.translate(QPoint((w/2 + w/4), (h/2 + h/4)));
+	qp.drawText(-retryMessageWidth/2, 0, retryMessage);
 }
 
 // if apple collides with head, increase the joints of snake
@@ -177,11 +171,11 @@ void Snake::timerEvent(QTimerEvent *e)
 		move();
 	}
 
-	// this is basically repainting the screen after every frame
+	// this is basically repainting the screen after every frame, calls paintEvent()
 	repaint();
 }
 
-// what happens when we press any of the arrow keys? this function decides that
+// what happens when we press any keys? this function decides that
 void Snake::keyPressEvent(QKeyEvent *e)
 {
 	int key = e->key();
@@ -206,5 +200,11 @@ void Snake::keyPressEvent(QKeyEvent *e)
         leftDirection = false;
         rightDirection = false;
 	}
+	if (key == Qt::Key_Y) {
+		inGame = true;
+		initGame();
+	}
+	if (key == Qt::Key_N) {
+		exit(0);
+	}
 }
-
