@@ -1,13 +1,15 @@
-### Snake Game in C++ Qt
+# Snake Game in C++ Qt
 
 A trivial implementation of Snake Game in Qt. 
 
 ## Dependencies
-`qt5-default` should be installed on your machine
+`qt5-default` and `qt-creator` with all their dependencies should be installed on your machine
 
 ## Compile
 `qmake`
+
 `make`
+
 `./SnakeGame`
 
 ## Contribution
@@ -19,4 +21,4 @@ A few thing to consider:
 2. Multi-line indentation using spaces (whatever width is required)
 3. use `#pragma once` instead of `#define` header locks
 
-This games was part of a Qt tutorial from (https://zetcode.com/gui/qt5/snake/)
+This game was part of a Qt tutorial from (https://zetcode.com/gui/qt5/snake/)
