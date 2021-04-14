@@ -2,3 +2,4 @@ MainMenu
 SnakeGame
 Makefile
 .qmake.stash
+*.o

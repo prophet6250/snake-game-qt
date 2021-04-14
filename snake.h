@@ -55,5 +55,4 @@ class Snake : public QWidget {
 		void move();
 		void doDrawing();
 		void gameOver(QPainter &);
-        void showMainMenu();
 };
